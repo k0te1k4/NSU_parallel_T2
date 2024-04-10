@@ -24,7 +24,7 @@ void linear_equation(double* A, double* b, double* x, long long N) {
             // x^{n+1} = x^n - tau(Ax^n - b)
             // (||Ax^n-b||_2) / (||b||_2) <epsilon
             // ||x||_2 = sqrt(sum_0^{N-1} u^2_i)
-
+            sum = 0;
             for (int k = 0; k < N; k++)
                 sum += A[k * N + k] * x[k]; // умножение матрицы на вектор
             sum_1 += (sum - b[j]) * (sum - b[j]); // квадрат разности сумм (числитель)
