@@ -6,15 +6,6 @@ using namespace std;
 
 const double tau = 0.00001;
 const double epsilon = 0.000000001;
-double ProductOfMatrix(const double* A, const double* x, int i, long long matrix_width) {
-    double sum = 0;
-
-    for (int j = 0; j < matrix_width; j++) {
-        sum += A[i * matrix_width + j] * x[j]; // умножение матрицы на вектор
-    }
-
-    return sum;
-}
 
 void linear_equation(double* A, double* b, double* x, long long N) {
     double sum_2 = 0;
@@ -33,7 +24,9 @@ void linear_equation(double* A, double* b, double* x, long long N) {
             // x^{n+1} = x^n - tau(Ax^n - b)
             // (||Ax^n-b||_2) / (||b||_2) <epsilon
             // ||x||_2 = sqrt(sum_0^{N-1} u^2_i)
-            sum = ProductOfMatrix(A, x, j, N);  // сумма перемножений матрицы на вектор
+
+            for (int k = 0; k < N; k++)
+                sum += A[k * N + k] * x[k]; // умножение матрицы на вектор
             sum_1 += (sum - b[j]) * (sum - b[j]); // квадрат разности сумм (числитель)
             arg[j] = tau * (sum - b[j]);
         }
