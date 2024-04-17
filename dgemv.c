@@ -71,7 +71,7 @@ double parallel_matrix_vector_product(double *a, double *b, double *c, int m, in
                 local_sum += c[i];
             }
         }
-
+#pragma omp atomic
         sum += local_sum;
     }
     printf("\nTotal sum: %lf\n", sum);
